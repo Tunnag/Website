@@ -2,7 +2,7 @@
 GO_VERSION = "1.24.2"
 HUGO_VERSION = "0.147.9"
 NODE_VERSION = "22"
-TZ = "America/Los_Angeles"
+TZ = "Europe/London"
 
 [build]
 publish = "public"
