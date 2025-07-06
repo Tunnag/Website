@@ -4,7 +4,7 @@ description: 'A free hugo theme'
 draft: false
 ---
 
-<h1 style="text-align: center;">How to use this theme</h1>
+<!-- <h1 style="text-align: center;">How to use this theme</h1>
 
 ## Quick start: how to install 📥
 
@@ -130,4 +130,4 @@ The MIT license means that you are completely free to do whatevere you want with
 
 If you wish you can support me in several ways.
 
-**[Why you should btw?](/posts/why-donating-to-free-and-opensource-software-projects-is-important/)**
+**[Why you should btw?](/posts/why-donating-to-free-and-opensource-software-projects-is-important/)** -->
