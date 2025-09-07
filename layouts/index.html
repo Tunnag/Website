@@ -1,0 +1,84 @@
+{{- define "main" -}}
+
+<div class="row gx-5 gy-3 mb-5">
+    <div class="col-lg-4">
+        <!-- profile picture-->
+        <img class="rounded profile-img img-fluid shadow" src="profile.jpeg" alt="Main image" />
+    </div>
+
+    <div class="col-lg-8">
+        <div class="text-center text-lg-start">
+            <div class="badge mb-4"></div>
+            <div class="fs-3 fw-light text-muted">
+                {{ .Site.Params.homepage.preTitle }}
+            </div>
+            <h1 class="display-1 fw-bolder">
+                <span class="d-inline">{{ .Site.Params.homepage.title }} </span>
+            </h1>
+            <p class="text-justify text-lg-start">
+                {{ .Site.Params.homepage.intro | markdownify}}
+            </p>
+        </div>
+
+        {{ if .Site.Params.socials.enabled }}
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="text-center text-muted mb-4">
+                    {{.Site.Params.contacts.socialCallToAction}}
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            {{ range .Site.Params.socials.link }}
+            <div class="col-4 mb-4 d-flex justify-content-center">
+                <a href="{{ .link }}">
+                    <i class="display-2 bi-{{ .name }} "></i>
+                </a>
+            </div>
+            {{ end}}
+        </div>
+        {{ end }}
+
+        {{ if .Site.Params.homepage.mainButton }}
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-lg-start mt-3 mt-lg-5">
+            <!-- button -->
+            <a class="btn btn-primary btn-lg px-5 py-3 fs-6 fw-bolder shadow-sm"
+                href="{{ .Site.Params.homepage.mainButtonRef }}">{{ .Site.Params.homepage.mainButton }}</a>
+            <a class="btn btn-secondary btn-lg px-5 py-3 fs-6 fw-bolder shadow-sm"
+                href="{{ .Site.Params.homepage.secondButtonRef }}">{{ .Site.Params.homepage.secondButton }}</a>
+        </div>
+        {{ end }}
+    </div>
+    <br />
+    <br />
+    <!-- <hr /> -->
+</div>
+
+<!-- Description -->
+<div class="mt-5 align-items-center">{{ .Content }}</div>
+<!--  -->
+
+<!-- latest posts -->
+
+<!-- {{ with (site.GetPage "/posts") }}
+  {{ if gt (len .Pages) 0 }}
+    <hr />
+    <h2 class="text-center my-4">{{ $.Site.Params.homepage.blogTitle }}</h2>
+
+    <div class="row g-3 mb-3">
+      {{ range first 4 .Pages }}
+        {{- partial "post-card.html" . -}}
+      {{ end }}
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <a
+        class="btn btn-primary btn-lg px-5 py-3 fs-6 fw-bolder shadow-sm"
+        href="{{ .RelPermalink }}"
+        >{{ $.Site.Params.homepage.blogButton }}</a>
+    </div>
+  {{ end }}
+{{ end }} -->
+
+<!--  -->
+{{- end -}}

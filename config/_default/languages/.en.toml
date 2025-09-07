@@ -147,6 +147,10 @@ Musicologically, Cameron is most interested in the study and preservation of the
   pageRef = "/music/"
   weight = 2
   [[menus.main]]
+  name = "Blog"
+  pageRef = "/blog/"
+  weight = 3
+  [[menus.main]]
   name = "Contact"
   pageRef = "pages/contact"
   weight = 4
