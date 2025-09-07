@@ -1,0 +1,20 @@
+{{ if .Site.Params.socials.enabled }}
+<nav class="socials my-4" aria-label="Social links">
+  <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4">
+    {{ range .Site.Params.socials.link }}
+      {{ $isMail := hasPrefix .link "mailto:" }}
+      {{ $label  := .label | default (.name | title) }}
+      <a
+        href="{{ .link | safeURL }}"
+        class="social btn-icon"
+        data-name="{{ .name }}"
+        aria-label="{{ $label }}"
+        title="{{ $label }}"
+        {{ if not $isMail }}target="_blank" rel="noopener"{{ end }}>
+        <i class="bi-{{ .name }}" aria-hidden="true"></i>
+        <span class="visually-hidden">{{ $label }}</span>
+      </a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}

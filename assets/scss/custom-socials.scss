@@ -1,0 +1,53 @@
+/* Uses CSS vars exported from custom-variables.scss */
+:root {
+  /* fallbacks in case */
+  --surface-card: var(--surface-card, #F1F1EF);
+  --card-border:  var(--card-border, rgba(12,34,23,.18));
+  --primary:      var(--primary, #0c2217);
+  --body-color:   var(--body-color, #02130b);
+}
+
+.socials {
+  /* size controls */
+  --btn-size: 3rem;      /* tweak for bigger/smaller icons */
+  --icon-size: 1.4rem;
+
+  .btn-icon {
+    width: var(--btn-size);
+    height: var(--btn-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background-color: #e3ddddd7;
+    color: var(--primary);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 1px 8px rgba(0,0,0,.06);
+    transition: transform .15s ease, box-shadow .15s ease, background-color .2s ease, color .2s ease;
+    text-decoration: none;
+  }
+
+  .btn-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.10);
+    background-color: #e3ddddd7;
+    color: var(--body-color);
+  }
+
+  .btn-icon i {
+    font-size: var(--icon-size);
+    line-height: 1;
+  }
+
+  /* Optional: subtle brand tints on hover (comment out if you prefer all-neutral) */
+  .btn-icon[data-name="github"]:hover   { color: #171515; }
+  .btn-icon[data-name="twitter"]:hover  { color: #1d9bf0; }
+  .btn-icon[data-name="linkedin"]:hover { color: #0a66c2; }
+  .btn-icon[data-name="youtube"]:hover  { color: #ff0000; }
+  .btn-icon[data-name="envelope"]:hover { color: var(--primary); }
+}
+
+/* Compact row spacing on very small screens */
+@media (max-width: 420px) {
+  .socials { --btn-size: 2.6rem; --icon-size: 1.2rem; }
+}

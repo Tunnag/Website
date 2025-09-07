@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="container my-5">
+  <header class="mb-4">
+    <h1 class="mb-1">{{ .Title }}</h1>
+    {{ with .Content }}<p class="lead">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="row g-3 g-sm-4">
+    {{ range .Pages.ByDate.Reverse }}
+      <div class="col-12 col-sm-6 col-lg-4 d-flex">
+        {{ partial "project-card.html" . }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
