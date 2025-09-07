@@ -1,0 +1,62 @@
+{{- $id    := .Get "id" -}}
+{{- $url   := .Get "url" -}}
+{{- $ratio := default "16x9" (.Get "ratio") -}}
+
+{{/* grid mode: makes the embed fluid inside a column */}}
+{{- $grid  := or (eq (.Get "grid") "1") (eq (.Get "grid") "true") (eq (.Get "mode") "grid") -}}
+
+{{- $loop  := or (eq (.Get "loop") "true") (eq (.Get "loop") "1") -}}
+{{- $auto  := or (eq (.Get "autoplay") "true") (eq (.Get "autoplay") "1") -}}
+{{- $at    := .Get "at" -}}
+
+{{- if and (not $id) $url -}}
+  {{- $m := findRE `/((v|embed))/([A-Za-z0-9_-]+)` $url -}}
+  {{- if gt (len $m) 0 -}}
+    {{- $id = index (findRE `[A-Za-z0-9_-]+$` (index $m 0)) 0 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $id -}}
+  {{ errorf "videopress shortcode: provide id=\"...\" or url=\"https://videopress.com/v/ID\"" }}
+{{- end -}}
+
+{{- $src := (printf "https://videopress.com/embed/%s?hd=1" $id) -}}
+{{- if $auto }}{{ $src = printf "%s&autoPlay=true" $src }}{{ end -}}
+{{- if $loop }}{{ $src = printf "%s&loop=true" $src }}{{ end -}}
+{{- with $at  }}{{ $src = printf "%s&at=%s" $src . }}{{ end -}}
+
+<figure class="my-2">
+  {{ if $grid }}
+    <!-- Grid mode: fills the column -->
+    <div class="ratio ratio-{{ $ratio }}">
+      <iframe
+        src="{{ $src }}"
+        title="Video"
+        loading="lazy"
+        allow="accelerometer; autoplay; encrypted-media; clipboard-write; picture-in-picture"
+        allowfullscreen
+        style="width:100%; height:100%; border:0;"></iframe>
+    </div>
+  {{ else }}
+    <!-- Standalone mode: centered with a max width -->
+    {{- $size  := default "md" (.Get "size") -}}
+    {{- $sizes := dict "sm" "420px" "md" "640px" "lg" "840px" "xl" "1024px" -}}
+    {{- $max   := .Get "max" | default (index $sizes $size) -}}
+    <div class="vp-embed mx-auto" style="max-width: {{ $max }}; width: 100%;">
+      <div class="ratio ratio-{{ $ratio }}">
+        <iframe
+          src="{{ $src }}"
+          title="Video"
+          loading="lazy"
+          allow="accelerometer; autoplay; encrypted-media; clipboard-write; picture-in-picture"
+          allowfullscreen
+          style="width:100%; height:100%; border:0;"></iframe>
+      </div>
+    </div>
+  {{ end }}
+</figure>
+
+{{- if not (.Page.Scratch.Get "vp-script") -}}
+  <script src="https://videopress.com/videopress-iframe.js" defer></script>
+  {{- .Page.Scratch.Set "vp-script" true -}}
+{{- end -}}

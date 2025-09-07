@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="container my-5">
+  <header class="mb-4">
+    <h1 class="mb-3">{{ .Title }}</h1>
+
+    {{ $show := ne (.Param "show_cover") false }}
+
+    {{ if $show }}
+      {{ $img := or (.Resources.GetMatch .Params.image) (.Resources.GetMatch "cover.*") }}
+      {{ with $img }}
+      <figure class="mb-4">
+        <img class="img-fluid rounded" src="{{ .RelPermalink }}" alt="{{ $.Title }}">
+      </figure>
+      {{ end }}
+    {{ end }}
+  </header>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  <div class="mt-4">
+   <a class="text-decoration-none" href="{{ .CurrentSection.RelPermalink }}">
+    ← Back to {{ .CurrentSection.Title }}
+  </a>
+  </div>
+</article>
+{{ end }}
