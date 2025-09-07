@@ -15,7 +15,7 @@ $btn-border-radius: 10px !default;
   --bs-card-color: #{$body-color};
   --bs-card-border-color: #{$card-border-color};
 
-  background-color: var(--bs-card-bg) !important; /* ensure the paint uses it */
+  background-color: #c1f0d5; // var(--bs-card-bg) !important; /* ensure the paint uses it */
   color: var(--bs-card-color);
   border-color: var(--bs-card-border-color);
   border-top: 3px solid $primary;
