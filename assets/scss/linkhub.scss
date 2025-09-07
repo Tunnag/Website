@@ -1,0 +1,68 @@
+/* Fallbacks in case :root vars aren't exported yet */
+:root{
+  --primary:      var(--primary, #0c2217);
+  --secondary:    var(--secondary, #E0DEDC);
+  --body-color:   var(--body-color, #02130b);
+  --surface-card: var(--surface-card, #F1F1EF); /* neutral porcelain */
+  --card-border:  var(--card-border, rgba(12,34,23,.18));
+}
+
+.linkhub {
+  max-width: 760px;
+}
+
+.linkhub-card{
+  max-width: 520px;
+  width: 100%;
+  background: var(--surface-card);
+  color: var(--body-color);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(0,0,0,.08);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.linkhub-avatar{
+  width: 92px; height: 92px; object-fit: cover;
+  border-radius: 999px; display: block; margin: 0 auto 0.75rem;
+  border: 3px solid color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.linkhub-title{ font-size: 1.4rem; margin: 0 0 .25rem; }
+.linkhub-bio{ margin: 0 0 1rem; color: color-mix(in srgb, var(--body-color) 70%, var(--secondary)); }
+
+.linkhub-links{
+  display: grid;
+  gap: 0.6rem;
+}
+
+.linkhub-btn{
+  display: grid;
+  grid-template-columns: 1.25rem auto;
+  align-items: center;
+  gap: .6rem;
+  width: 100%;
+  background: #fff; /* stays neutral on your green bg */
+  color: var(--body-color);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: .65rem .9rem;
+  text-decoration: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  transition: transform .15s ease, box-shadow .15s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.linkhub-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.10);
+  background: color-mix(in srgb, #fff 85%, var(--secondary));
+  border-color: color-mix(in srgb, var(--primary) 22%, var(--card-border));
+}
+.linkhub-btn i{ font-size: 1.1rem; line-height: 1; justify-self: center; }
+
+/* Compact on small screens */
+@media (max-width: 420px){
+  .linkhub-card{ padding: 1rem; }
+  .linkhub-title{ font-size: 1.25rem; }
+  .linkhub-btn{ padding: .6rem .8rem; }
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default .Site.Language.Lang }}">
+  <head>
+    {{/* Reuse the theme's head for CSS/meta/OG tags */}}
+    {{ partial "head.html" . }}
+
+    {{/* Respect noindex per front matter */}}
+    {{ if .Params.noindex }}<meta name="robots" content="noindex,nofollow">{{ end }}
+
+    {{/* Page-scoped CSS for the hub (only loads on this page) */}}
+    {{ $css := resources.Get "scss/linkhub.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  </head>
+  <body class="linkhub-standalone">
+    <main class="linkhub-page container min-vh-100 d-flex align-items-center justify-content-center py-4">
+      <div class="linkhub-card">
+        {{ with .Params.avatar }}
+          <img class="linkhub-avatar" src="{{ . | relURL }}" alt="{{ $.Title }}">
+        {{ end }}
+        <h1 class="linkhub-title">{{ .Title }}</h1>
+        {{ with .Params.bio }}<p class="linkhub-bio">{{ . }}</p>{{ end }}
+
+        <div class="linkhub-links">
+          {{ range .Params.links }}
+            {{ $isMail := hasPrefix .url "mailto:" }}
+            <a class="linkhub-btn"
+               href="{{ .url | relURL }}"
+               {{ if not $isMail }}target="_blank" rel="noopener"{{ end }}>
+              {{ with .icon }}<i class="bi-{{ . }}" aria-hidden="true"></i>{{ end }}
+              <span>{{ .label }}</span>
+            </a>
+          {{ end }}
+        </div>
+
+        {{ with .Content }}<div class="mt-3">{{ . }}</div>{{ end }}
+      </div>
+    </main>
+  </body>
+</html>
